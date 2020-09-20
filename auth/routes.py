@@ -15,7 +15,6 @@ from auth.register.user_signup import authenticate
 from auth.login.user_signin import signin
 
 
-
 """ Simple Content)) """
 @app.route('/')
 def content():
