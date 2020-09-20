@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+auth/__pycache__
+auth/login/__pycache__
+auth/register/__pycache__
+.vscode/

@@ -1,0 +1,21 @@
+{% extends "libs.html" %}
+{% block form %}		
+			<div class="card center" style="width: 18rem;">
+				 <div class="card-body">
+				   <h4 class="card-title text-center">Login</h4>
+					 <form method="POST">
+					      <div class="form-label-group">
+							<label for="inputEmail">Email address</label>
+							<input name="email" type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus>
+						</div>
+						<div class="form-label-group">
+							<label for="inputPassword">Password</label>
+							<input name="passwd" type="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
+						</div>
+							<button class="btn btn-outline-info btn-block " type="submit">Login</button>
+						<hr>
+							<a href="{{ url_for('register') }}" class="text-center">Don’t have an account? Register</a>
+					 </form>
+					</div>
+				</div>
+{% endblock form %}
