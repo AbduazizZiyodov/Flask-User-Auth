@@ -44,8 +44,7 @@ def login():
         return redirect(url_for('content'))
 
     elif request.method == "POST":
-        email = request.form["email"]
-        password = request.form["passwd"]
+        email,password = request.form["email"] , request.form["passwd"]
 
         signin(email, password)
 
