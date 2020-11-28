@@ -1,16 +1,36 @@
-## Setup
-Clone repository and change directory:
+# Flask-User-Auth example
+<hr>
+
+### Clone Repo.
+
+```bash
+git clone https://github.com/AbduazizZiyodov/Flask-User-Authentication.git
 ```
-    git clone https://github.com/AbduazizZiyodov/Flask-User-Authentication.git
-    cd Flask-User-Authentication
-```    
-Change db configs from file `__init__.py`
-Install packages from requirements.txt
+<hr>
+
+### Setup:
+
 ```bash
-   pip3 install -r requirements.txt   
-```    
-Run server:
+cd Flask-User-Authentication
+python -m venv env
+source env/scripts/activate
+```
+<hr>
+
+#### Install packages from file requirements.txt:
+
 ```bash
-    $ python3 server.py
-```    
-Enjoy ))
+pip install -r requirements.txt
+```
+<hr>
+
+### Run server:
+
+```bash
+python server.py
+ * Debugger is active!
+ * Debugger PIN: 203-251-880
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+**Go `=>` `http://127.0.0.1:5000/`**
+
