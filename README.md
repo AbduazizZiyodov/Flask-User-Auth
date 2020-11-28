@@ -4,7 +4,7 @@
 ### Clone Repo.
 
 ```bash
-git clone https://github.com/AbduazizZiyodov/Flask-User-Authentication.git
+git clone https://github.com/AbduazizZiyodov/flask-user-auth.git
 ```
 <hr>
 
