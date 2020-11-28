@@ -8,15 +8,17 @@ from flask import (
     abort,
     jsonify
     )
-
-from auth import app, db ,bcrypt
-from auth.models import User
-from auth.login.user_signin import signin
 from flask_login import current_user
+
+from src import app ,bcrypt
+from src.views import db
+from src.database.models import User
+from src.UserSignIn import SignIn
+
 
 """ Register Function """
 def authenticate(request_email, request_username, request_passwd ):  
-
+        # Simple Validation
         if User.query.filter_by(email=request_email).first(): 
             flash('This email is already taken' , 'danger')
 
@@ -28,12 +30,16 @@ def authenticate(request_email, request_username, request_passwd ):
 
         else:
             hashed_password = bcrypt.generate_password_hash(request_passwd).decode('utf-8')
-
             new_user = User(username=request_username,email=request_email,password=hashed_password)
 
-            db.session.add(new_user)
-            db.session.commit()
+            try:
+                new_user.auth()
+
+            except:
+                return jsonify({
+                    "Success": False
+                })    
     
-            signin(request_email , request_passwd)
+            SignIn(request_email , request_passwd)
 
             

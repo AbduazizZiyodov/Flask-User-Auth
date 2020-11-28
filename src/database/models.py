@@ -1,5 +1,8 @@
-from auth import db, login_manager
 from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
+
+
+db= SQLAlchemy()
 
 
 #User model
@@ -10,11 +13,10 @@ class User(db.Model,UserMixin ):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
+    def auth(self):
+        db.session.add(self)
+        db.session.commit()
+
     def __repr__(self):
         return f"User('{self.email}')"
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
 

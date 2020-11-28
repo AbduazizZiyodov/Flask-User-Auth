@@ -9,11 +9,12 @@ from flask import (
     jsonify
     )
 from flask_login import login_user    
-from auth import app, db ,bcrypt
-from auth.models import User
+from src import app, bcrypt
+from src.views import db
+from src.database.models import User
 
 """Login Function"""
-def signin(request_email, request_password):
+def SignIn(request_email, request_password):
         email = request_email
         password = request_password
         user = User.query.filter_by(email = email).first()

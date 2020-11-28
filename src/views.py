@@ -8,19 +8,29 @@ from flask import (
     )
 from flask_login import login_user, current_user, logout_user, login_required
 
-from auth import app, db ,bcrypt
-from auth.models import User
-from auth.register.user_signup import authenticate
-from auth.login.user_signin import signin
+from src import app
+from src.database.models import User, db
+from src.UserSignUp import authenticate
+from src.UserSignIn import SignIn
 
 
-""" Simple Content)) """
+db.init_app(app)
+db.app = app
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/db.sqlite"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.create_all()
+
+
+""" HomePage """
 @app.route('/')
 def content():
     return render_template('page.html')
 
 
-""" Register Route """
+
+""" Register Controller"""
 @app.route('/register' ,methods = ['GET', 'POST'])
 def register(): 
     if current_user.is_authenticated:
@@ -37,7 +47,7 @@ def register():
     return render_template('register.html')      
 
 
-""" Login Route """
+""" Login Controller """
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -46,12 +56,13 @@ def login():
     elif request.method == "POST":
         email,password = request.form["email"] , request.form["passwd"]
 
-        signin(email, password)
+        SignIn(email, password)
 
         if current_user.is_authenticated:
             return redirect(url_for('content'))
 
     return render_template('login.html')
+
 
 """ Logout """
 @app.route("/logout")
