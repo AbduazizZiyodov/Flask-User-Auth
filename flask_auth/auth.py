@@ -8,17 +8,31 @@ from flask import (
     abort,
     jsonify
     )
-from flask_login import current_user
-
-from src import app ,bcrypt
-from src.views import db
-from src.database.models import User
-from src.UserSignIn import SignIn
+from flask_login import login_user, current_user    
+from flask_auth import app, bcrypt
+from flask_auth.config import db
+from flask_auth.database.models import User
 
 
-""" Register Function """
+"""
+Login Function
+"""
+def SignIn(request_email, request_password):
+        email = request_email
+        password = request_password
+        user = User.query.filter_by(email = email).first()
+        if user and bcrypt.check_password_hash(user.password , password):
+            login_user(user)
+            return redirect(url_for('content'))
+        else:
+            flash("Email or password is incorrect!" , 'danger')
+
+
+""" 
+Register Function 
+"""
+
 def authenticate(request_email, request_username, request_passwd ):  
-        # Simple Validation
         if User.query.filter_by(email=request_email).first(): 
             flash('This email is already taken' , 'danger')
 
@@ -41,5 +55,3 @@ def authenticate(request_email, request_username, request_passwd ):
                 })    
     
             SignIn(request_email , request_passwd)
-
-            

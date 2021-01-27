@@ -7,27 +7,17 @@ from flask import (
     request, 
     )
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_auth import app
+from flask_auth.config import db
+from flask_auth.database.models import User
+from flask_auth.auth import SignIn, authenticate
 
-from src import app
-from src.database.models import User, db
-from src.UserSignUp import authenticate
-from src.UserSignIn import SignIn
-
-
-db.init_app(app)
-db.app = app
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database/db.sqlite"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.create_all()
 
 
 """ HomePage """
 @app.route('/')
 def content():
     return render_template('page.html')
-
 
 
 """ Register Controller"""
