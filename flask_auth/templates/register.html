@@ -5,21 +5,23 @@
             <h4 class="card-title text-center">Register</h4>
             <form method="POST">
                 <div class="form-label-group">
-                  <label for="inputEmail">Email address</label>
+                  <label for="inputEmail">Email address:</label>
                   <input name="email" type="email" id="inputEmail" class="form-control mb-2" placeholder="Email address" required autofocus>
                 </div>
 
                 <div class="form-label-group">
-                  <label for="inputUsername">Username</label>
+                  <label for="inputUsername">Username:</label>
                   <input name="username" type="text" id="inputUsername" class="form-control mb-2" placeholder="Username" name="username" required>
                 </div>
 
                 <div class="form-label-group">
-                  <label for="inputPassword">Password</label>
+                  <label for="inputPassword">Password:</label>
                   <input name="passwd" type="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required>
-                  <small class="text-muted">Password must be at least 8 characters</small>
                 </div>
-                  <button class="btn btn-outline-info btn-block " type="submit">Register</button>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary btn-block " type="submit">Register</button>
+                </div>
+                  
                 <hr>
                   <a href="{{ url_for('login') }}" class="text-center">Already have an account? Login</a>
               </form>
