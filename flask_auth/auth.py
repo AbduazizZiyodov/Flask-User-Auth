@@ -8,6 +8,7 @@ from flask import (
     abort,
     jsonify
     )
+from functools import wraps    
 from flask_login import login_user, current_user    
 from flask_auth import app, bcrypt
 from flask_auth.config import db

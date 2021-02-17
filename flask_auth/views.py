@@ -10,7 +10,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_auth import app
 from flask_auth.config import db
 from flask_auth.database.models import User
-from flask_auth.auth import SignIn, authenticate
+from flask_auth.auth import SignIn, authenticate, auth_required
 
 
 
@@ -53,6 +53,10 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/protected')
+@auth_required
+def protected_route():
+    return "This is Protected route"
 
 """ Logout """
 @app.route("/logout")
