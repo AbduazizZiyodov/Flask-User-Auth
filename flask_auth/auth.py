@@ -24,8 +24,8 @@ def SignIn(request_email, request_password):
         if user and bcrypt.check_password_hash(user.password , password):
             login_user(user)
             return redirect(url_for('content'))
-        else:
-            flash("Email or password is incorrect!" , 'danger')
+
+        flash("Email or password is incorrect!" , 'danger')
 
 
 """ 
@@ -43,15 +43,25 @@ def authenticate(request_email, request_username, request_passwd ):
             flash("Password must be at least 8 characters!", 'warning')  
 
         else:
-            hashed_password = bcrypt.generate_password_hash(request_passwd).decode('utf-8')
+            hashed_password = bcrypt.generate_password_hash(request_passwd)\
+                                                            .decode('utf-8')
             new_user = User(username=request_username,email=request_email,password=hashed_password)
 
             try:
                 new_user.auth()
 
-            except:
+            except Exception:
                 return jsonify({
                     "Success": False
                 })    
-    
-            SignIn(request_email , request_passwd)
+
+            SignIn(request_email , request_passwd)          
+
+def auth_required(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            if current_user.is_authenticated == False:
+                flash('Avval tizimga kiring', 'danger')
+                return redirect(url_for('content', next=request.url))
+            return f(*args, **kwargs)
+        return wrapper                
